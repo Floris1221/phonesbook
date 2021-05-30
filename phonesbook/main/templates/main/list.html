@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>List of people</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+.dodaj {
+  background-color: lightgreen;
+  margin-left: 40px;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+.myButton {
+	box-shadow: 0px 10px 14px -7px #276873;
+	margin: 5px;
+	background-color:#599bb3;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+	float: right
+}
+.myButton:hover {
+	background-color:#408c99;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+#top{
+    margin-left: 40px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+    </style>
+
+
+    <script>
+function myFunction(email,ph) {
+
+
+  var div = document.getElementById('del');
+
+  // If email and phone number isn't null
+  if (email == null && ph == null){
+    div.style.display = "none";
+  } else {
+    div.style.display = "block";
+  }
+}
+</script>
+
+</head>
+<body>
+    <div id="top">
+        <form>
+            <input name="q" type="text" placeholder="Search" class="form-control form-control-lg/">
+            <div class="input-gropu-append">
+                <button>Search</button>
+            </div>
+        </form>
+        <h2>Dodaj nową osobę</h2>
+        <a class="dodaj" href="create">Dodaj</a>
+    </div>
+    {% for p in Person%}
+    <ul class="w3-ul w3-card-4">
+        <li class="w3-bar">
+            {% if not p.email or not p.phone_number %}
+            <a class="myButton" href="delete_person/{{p.id}}" >x</a>
+            {% endif %}
+            <a class="myButton" href="edit/{{p.id}}" >Edit</a>
+            <div class="w3-bar-item">
+                <span class="w3-large">{{p.first_name}}   {{p.last_name}}</span><br>
+                <span> email: {{p.email}}</span> <span style="margin-left:30px"> numer telefonu: {{p.phone_number}}</span>
+            </div>
+        </li>
+    </ul>
+    {% endfor %}
+</body>
+</html>
